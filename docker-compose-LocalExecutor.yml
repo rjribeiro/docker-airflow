@@ -19,12 +19,18 @@ services:
         environment:
             - LOAD_EX=n
             - EXECUTOR=Local
+            - SCRAPY=/usr/local/airflow/.local/bin/scrapy
+
         logging:
             options:
                 max-size: 10m
                 max-file: "3"
         volumes:
             - ./dags:/usr/local/airflow/dags
+            #- ./python_scripts:/usr/local/airflow/python_scripts
+            - ./data:/usr/local/airflow/data
+            - ./__init__.py:/usr/local/airflow/__init__.py
+            - ./requirements.txt:/requirements.txt
             # - ./plugins:/usr/local/airflow/plugins
         ports:
             - "8080:8080"
